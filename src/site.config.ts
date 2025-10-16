@@ -1,20 +1,18 @@
 import type { SiteConfig } from "@/types";
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 
-export const siteConfig: SiteConfig = {
-	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
-	author: "Chris Williams",
-	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
-	date: {
-		locale: "en-GB",
-		options: {
-			day: "numeric",
-			month: "short",
-			year: "numeric",
-		},
+export const siteConfig = {
+  author: "Kasturi Kandalam",
+  title: "Kasturi Kandalam",
+  description: "econ | data | development | side quests",
+  lang: "en-US",
+  ogLocale: "en_US",
+  date: { locale: "en-IN", options: { day: "numeric", month: "short", year: "numeric" } },
+  sortPostsByUpdatedDate: false,
+};
 	},
 	// Used as the default description meta property and webmanifest description
-	description: "An opinionated starter theme for Astro",
+	description: "I am Kasturi Kandalam, pre-doc at Indian Statistical Institute - Delhi Centre",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
