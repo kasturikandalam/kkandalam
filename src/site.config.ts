@@ -17,11 +17,7 @@ export const siteConfig: SiteConfig = {
     options: { day: "numeric", month: "short", year: "numeric" },
   },
 
-  // Post sorting (false = by publishDate)
-  sortPostsByUpdatedDate: false,
-
-  // Domain used by some theme features / manifest
-  // Replace with your real URL when ready
+  // Domain used by theme features / manifest
   url: "https://kkandalam12.vercel.app/",
 };
 
@@ -31,8 +27,6 @@ export const menuLinks: { path: string; title: string }[] = [
   { path: "/posts/", title: "Blog" },
   { path: "/papers/", title: "Papers" }, // create src/pages/papers.astro
   { path: "/cv/Kasturi_Kandalam_CV.pdf", title: "CV" }, // put file in public/cv/
-  // { path: "/about/", title: "About" },   // uncomment if you keep an About page
-  // { path: "/notes/", title: "Notes" },   // uncomment if you keep Notes
 ];
 
 // https://expressive-code.com/reference/configuration/
@@ -48,15 +42,15 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
     uiLineHeight: "inherit",
   },
   themeCssSelector(theme, { styleVariants }) {
-    // One dark and one light theme -> support dark-mode switch
+    // Support dark/light switch safely (baseTheme may be undefined)
     if (styleVariants.length >= 2) {
       const baseTheme = styleVariants[0]?.theme;
-      const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme.type)?.theme;
+      const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
       if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
     }
     return `[data-theme="${theme.name}"]`;
   },
-  // One dark, one light theme
+  // One dark + one light theme
   themes: ["dracula", "github-light"],
   useThemedScrollbars: false,
 };
