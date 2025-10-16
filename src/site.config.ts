@@ -24,9 +24,8 @@ export const siteConfig: SiteConfig = {
 // Header & Footer links
 export const menuLinks: { path: string; title: string }[] = [
   { path: "/", title: "Home" },
-  { path: "/posts/", title: "Blog" },
   { path: "/papers/", title: "Papers" }, // create src/pages/papers.astro
-  { path: "/cv/Kasturi_Kandalam_CV.pdf", title: "CV" }, // put file in public/cv/
+  { path: "/public/cv/Kasturi_Kandalam_CV.pdf", title: "CV" }, // put file in public/cv/
 ];
 
 // https://expressive-code.com/reference/configuration/
