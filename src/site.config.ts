@@ -1,79 +1,62 @@
 import type { SiteConfig } from "@/types";
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 
-export const siteConfig = {
+export const siteConfig: SiteConfig = {
+  // Site identity & meta
   author: "Kasturi Kandalam",
   title: "Kasturi Kandalam",
   description: "econ | data | development | side quests",
-  lang: "en-US",
-  ogLocale: "en_US",
-  date: { locale: "en-IN", options: { day: "numeric", month: "short", year: "numeric" } },
+
+  // HTML lang & Open Graph locale
+  lang: "en-GB",
+  ogLocale: "en_GB",
+
+  // Date formatting used across the site
+  date: {
+    locale: "en-IN",
+    options: { day: "numeric", month: "short", year: "numeric" },
+  },
+
+  // Post sorting (false = by publishDate)
   sortPostsByUpdatedDate: false,
-};
-	},
-	// Used as the default description meta property and webmanifest description
-	description: "I am Kasturi Kandalam, pre-doc at Indian Statistical Institute - Delhi Centre",
-	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
-	lang: "en-GB",
-	// Meta property, found in src/components/BaseHead.astro L:42
-	ogLocale: "en_GB",
-	/* 
-		- Used to construct the meta title property found in src/components/BaseHead.astro L:11 
-		- The webmanifest name found in astro.config.ts L:42
-		- The link value found in src/components/layout/Header.astro L:35
-		- In the footer found in src/components/layout/Footer.astro L:12
-	*/
-	title: "Astro Cactus",
-	// ! Please remember to replace the following site property with your own domain, used in astro.config.ts
-	url: "https://astro-cactus.chriswilliams.dev/",
+
+  // Domain used by some theme features / manifest
+  // Replace with your real URL when ready
+  url: "https://kkandalam12.vercel.app/",
 };
 
-// Used to generate links in both the Header & Footer.
+// Header & Footer links
 export const menuLinks: { path: string; title: string }[] = [
-	{
-		path: "/",
-		title: "Home",
-	},
-	{
-		path: "/about/",
-		title: "About",
-	},
-	{
-		path: "/posts/",
-		title: "Blog",
-	},
-	{
-		path: "/notes/",
-		title: "Notes",
-	},
+  { path: "/", title: "Home" },
+  { path: "/posts/", title: "Blog" },
+  { path: "/papers/", title: "Papers" }, // create src/pages/papers.astro
+  { path: "/cv/Kasturi_Kandalam_CV.pdf", title: "CV" }, // put file in public/cv/
+  // { path: "/about/", title: "About" },   // uncomment if you keep an About page
+  // { path: "/notes/", title: "Notes" },   // uncomment if you keep Notes
 ];
 
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
-	styleOverrides: {
-		borderRadius: "4px",
-		codeFontFamily:
-			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-		codeFontSize: "0.875rem",
-		codeLineHeight: "1.7142857rem",
-		codePaddingInline: "1rem",
-		frames: {
-			frameBoxShadowCssValue: "none",
-		},
-		uiLineHeight: "inherit",
-	},
-	themeCssSelector(theme, { styleVariants }) {
-		// If one dark and one light theme are available
-		// generate theme CSS selectors compatible with cactus-theme dark mode switch
-		if (styleVariants.length >= 2) {
-			const baseTheme = styleVariants[0]?.theme;
-			const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
-			if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
-		}
-		// return default selector
-		return `[data-theme="${theme.name}"]`;
-	},
-	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
-	themes: ["dracula", "github-light"],
-	useThemedScrollbars: false,
+  styleOverrides: {
+    borderRadius: "4px",
+    codeFontFamily:
+      'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+    codeFontSize: "0.875rem",
+    codeLineHeight: "1.7142857rem",
+    codePaddingInline: "1rem",
+    frames: { frameBoxShadowCssValue: "none" },
+    uiLineHeight: "inherit",
+  },
+  themeCssSelector(theme, { styleVariants }) {
+    // One dark and one light theme -> support dark-mode switch
+    if (styleVariants.length >= 2) {
+      const baseTheme = styleVariants[0]?.theme;
+      const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme.type)?.theme;
+      if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
+    }
+    return `[data-theme="${theme.name}"]`;
+  },
+  // One dark, one light theme
+  themes: ["dracula", "github-light"],
+  useThemedScrollbars: false,
 };
